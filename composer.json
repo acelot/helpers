@@ -1,0 +1,38 @@
+{
+  "name": "acelot/helpers",
+  "description": "Useful PHP functions for everyday use",
+  "keywords": [
+    "helpers", "utilities", "array-helper", "string-helper", "date-helper"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/acelot/helpers",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Valeriy Protopopov",
+      "email": "provaleriy@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "files": [
+      "src/array_helpers.php",
+      "src/date_helpers.php",
+      "src/string_helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Acelot\\Helpers\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit -c phpunit.xml"
+  }
+}
