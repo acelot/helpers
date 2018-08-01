@@ -4,7 +4,7 @@
 ![](https://img.shields.io/badge/dependencies-zero-blue.svg)
 ![](https://img.shields.io/badge/license-MIT-green.svg)
 
-Useful PHP functions for everyday use.
+Useful, well documented and tested PHP functions for everyday use.
 
 ## Docs
 
