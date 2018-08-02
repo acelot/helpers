@@ -85,9 +85,5 @@ function tokenize(string $string, $delimiter = ',', int $options = TK_DEFAULTS):
         $arr = array_filter($arr);
     }
 
-    if ($options & TK_TO_INT) {
-        $arr = array_map('intval', $arr);
-    }
-
     return $arr;
 }
