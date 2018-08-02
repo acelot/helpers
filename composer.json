@@ -14,10 +14,10 @@
     }
   ],
   "require": {
-    "php": "^7.2",
-    "ext-mbstring": "*"
+    "php": "^7.2"
   },
   "require-dev": {
+    "ext-mbstring": "*",
     "phpunit/phpunit": "^7.0"
   },
   "autoload": {
