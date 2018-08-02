@@ -47,6 +47,40 @@ class StringHelperTest extends TestCase
         $this->assertEquals($expected, camelcase($input));
     }
 
+    public function camelcaseLcFirstProvider()
+    {
+        return [
+            ['', ''],
+            [' ', ''],
+            ['  ', ''],
+            ['_', ''],
+            ['__', ''],
+            ['a', 'a'],
+            ['a_', 'a'],
+            ['_a', 'A'],
+            ['A', 'a'],
+            ['ab', 'ab'],
+            ['abc', 'abc'],
+            ['a_b', 'aB'],
+            ['a_b_c', 'aBC'],
+            ['ab_ab', 'abAb'],
+            ['abc_abc', 'abcAbc'],
+            ['abc_abc_abc', 'abcAbcAbc'],
+            ['a__b', 'aB'],
+        ];
+    }
+
+    /**
+     * @dataProvider camelcaseLcFirstProvider
+     *
+     * @param string $input
+     * @param string $expected
+     */
+    public function testCamelcaseLcFirst($input, $expected)
+    {
+        $this->assertEquals($expected, camelcase($input, true));
+    }
+
     public function underscoreProvider()
     {
         return [

@@ -11,6 +11,7 @@ use function Acelot\Helpers\array_req;
 use function Acelot\Helpers\array_to_object;
 use function Acelot\Helpers\is_array_flat;
 use function Acelot\Helpers\is_array_scalar;
+use Acelot\Helpers\Tests\Fixtures\Collection;
 use PHPUnit\Framework\TestCase;
 
 class ArrayHelpersTest extends TestCase
@@ -41,7 +42,7 @@ class ArrayHelpersTest extends TestCase
             'sequentially indexed' => [
                 [0 => 'a', 1 => 'b', 2 => 'c'],
                 true
-            ]
+            ],
         ];
     }
 
@@ -78,7 +79,7 @@ class ArrayHelpersTest extends TestCase
             'object' => [
                 [new \stdClass()],
                 false
-            ]
+            ],
         ];
     }
 
@@ -172,7 +173,7 @@ class ArrayHelpersTest extends TestCase
                     '.'
                 ],
                 true
-            ]
+            ],
         ];
     }
 
@@ -330,7 +331,7 @@ class ArrayHelpersTest extends TestCase
                     ['a' => 1, 'b' => 2, 'c' => [1, 2, 3]]
                 ],
                 1
-            ]
+            ],
         ];
     }
 
