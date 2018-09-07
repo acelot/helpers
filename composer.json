@@ -14,15 +14,16 @@
     }
   ],
   "require": {
-    "php": "^7.2"
+    "php": "^7.2",
+    "ext-mbstring": "*"
   },
   "require-dev": {
-    "ext-mbstring": "*",
     "phpunit/phpunit": "^7.0"
   },
   "autoload": {
     "files": [
       "src/array_helpers.php",
+      "src/common_helpers.php",
       "src/date_helpers.php",
       "src/string_helpers.php"
     ]
