@@ -58,7 +58,7 @@ class RetryHelpersTest extends TestCase
             $retries = retry_count(function () use (&$i) {
                 if (++$i === 5) return $i;
                 throw new \Exception('test');
-            }, 1 * MILLISECONDS, 10);
+            }, 10, 1 * MILLISECONDS);
 
             $this->assertEquals(5, $retries);
         } catch (\Exception $e) {

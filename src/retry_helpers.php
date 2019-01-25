@@ -2,8 +2,8 @@
 
 namespace Acelot\Helpers;
 
-const SECONDS = 1000000;
-const MILLISECONDS = 1000;
+const SECONDS = Retry::SECONDS;
+const MILLISECONDS = Retry::MILLISECONDS;
 
 /**
  * Repeats the callback until the answer is returned or timeout occurs.
@@ -17,18 +17,7 @@ const MILLISECONDS = 1000;
  */
 function retry_timeout(callable $callable, int $timeout, int $pause = 0)
 {
-    $start = microtime(true);
-
-    while (true) {
-        try {
-            return $callable();
-        } catch (\Throwable $e) {
-            if (microtime(true) - $start > ($timeout / SECONDS)) {
-                throw $e;
-            }
-            usleep($pause);
-        }
-    }
+    return Retry::create($callable, $timeout, -1, $pause)->run();
 }
 
 /**
@@ -43,14 +32,5 @@ function retry_timeout(callable $callable, int $timeout, int $pause = 0)
  */
 function retry_count(callable $callable, int $count, int $pause = 0)
 {
-    while (true) {
-        try {
-            return $callable();
-        } catch (\Throwable $e) {
-            if (--$count === 0) {
-                throw $e;
-            }
-            usleep($pause);
-        }
-    }
+    return Retry::create($callable, -1, $count, $pause)->run();
 }
