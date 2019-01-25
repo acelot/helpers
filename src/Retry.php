@@ -71,7 +71,7 @@ class Retry
      */
     public function run()
     {
-        $count = $this->count;
+        $count = 0;
         $start = microtime(true);
 
         while (true) {
@@ -89,20 +89,20 @@ class Retry
                 }
 
                 // Check count
-                if ($this->count > -1 && --$count <= 0) {
+                if ($this->count > -1 && ++$count >= $this->count) {
                     throw $e;
                 }
 
                 // Before pause hook
                 if (array_key_exists(self::BEFORE_PAUSE_HOOK, $this->hooks)) {
-                    call_user_func($this->hooks[self::BEFORE_PAUSE_HOOK]);
+                    call_user_func($this->hooks[self::BEFORE_PAUSE_HOOK], $e);
                 }
 
                 usleep($this->pause);
 
                 // After pause hook
                 if (array_key_exists(self::AFTER_PAUSE_HOOK, $this->hooks)) {
-                    call_user_func($this->hooks[self::AFTER_PAUSE_HOOK]);
+                    call_user_func($this->hooks[self::AFTER_PAUSE_HOOK], $e);
                 }
             }
         }
