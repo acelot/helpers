@@ -2,7 +2,7 @@
   "name": "acelot/helpers",
   "description": "Useful PHP functions for everyday use",
   "keywords": [
-    "helpers", "utilities", "array-helper", "string-helper", "date-helper"
+    "helpers", "utilities", "array", "string", "date", "retry", "chunk", "chunk-iterator"
   ],
   "type": "library",
   "homepage": "https://github.com/acelot/helpers",
