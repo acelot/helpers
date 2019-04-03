@@ -24,6 +24,11 @@ class ChunkIterator implements \Iterator
     private $preserveKeys;
 
     /**
+     * @var bool
+     */
+    private $uniqueOnly;
+
+    /**
      * @var int
      */
     private $chunkIndex = 0;
@@ -34,12 +39,17 @@ class ChunkIterator implements \Iterator
     private $buffer = [];
 
     /**
-     * @param \Iterator $iterator     Wrapped iterator
-     * @param int       $chunkSize    Maximum number of elements in the chunk buffer (greater than 0)
-     * @param bool      $preserveKeys If true, then keep the keys of the wrapped iterator
+     * @param \Iterator $iterator     Wrapped iterator.
+     * @param int       $chunkSize    Maximum number of elements in the chunk buffer (greater than 0).
+     * @param bool      $preserveKeys If true, then keep the keys of the wrapped iterator.
+     * @param bool      $uniqueOnly   Collect only unique values in the chunk buffer.
      */
-    public function __construct(\Iterator $iterator, int $chunkSize, bool $preserveKeys = false)
-    {
+    public function __construct(
+        \Iterator $iterator,
+        int $chunkSize,
+        bool $preserveKeys = false,
+        bool $uniqueOnly = false
+    ) {
         if ($chunkSize < 1) {
             throw new \InvalidArgumentException('Chunk size must be greater than zero');
         }
@@ -47,6 +57,7 @@ class ChunkIterator implements \Iterator
         $this->iterator = $iterator;
         $this->chunkSize = $chunkSize;
         $this->preserveKeys = $preserveKeys;
+        $this->uniqueOnly = $uniqueOnly;
     }
 
     public function current()
@@ -85,11 +96,20 @@ class ChunkIterator implements \Iterator
         $this->buffer = [];
         $i = 0;
         while ($this->iterator->valid() && $i++ < $this->chunkSize) {
-            if ($this->preserveKeys) {
-                $this->buffer[$this->iterator->key()] = $this->iterator->current();
-            } else {
-                $this->buffer[] = $this->iterator->current();
+            $current = $this->iterator->current();
+
+            // Skip current value if it's non-unique
+            if ($this->uniqueOnly && array_search($current, $this->buffer, true) !== false) {
+                $this->iterator->next();
+                continue;
             }
+
+            if ($this->preserveKeys) {
+                $this->buffer[$this->iterator->key()] = $current;
+            } else {
+                $this->buffer[] = $current;
+            }
+
             $this->iterator->next();
         }
     }

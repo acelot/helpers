@@ -5,11 +5,30 @@ namespace Acelot\Helpers;
 const PATH_SPEC = "/->\w+|->{'[^']+'}|\[\d+\]|\['[^']+'\]|\[#first\]|\[#last\]|(?<error>.+)/u";
 
 /**
+ * Checks whether path exists in the object or an array.
+ *
+ * @param object|array $var
+ * @param string       $path
+ *
+ * @return mixed
+ * @throws \InvalidArgumentException
+ */
+function exists_by_path($var, string $path)
+{
+    try {
+        req_by_path($var, $path);
+        return true;
+    } catch (\OutOfBoundsException $e) {
+        return false;
+    }
+}
+
+/**
  * Same as `req_by_path`, but returns default value if path not found.
  *
- * @param mixed  $var
- * @param string $path
- * @param mixed  $default
+ * @param object|array $var
+ * @param string       $path
+ * @param mixed        $default
  *
  * @return mixed
  * @throws \InvalidArgumentException
@@ -27,8 +46,8 @@ function get_by_path($var, string $path, $default = null)
  * Returns nested value of any array or an object along a specific path.
  * Throws an OutOfBoundsException if path not found.
  *
- * @param mixed  $var
- * @param string $path
+ * @param object|array $var
+ * @param string       $path
  *
  * @return mixed
  * @throws \InvalidArgumentException

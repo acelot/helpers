@@ -232,6 +232,91 @@ class ChunkIteratorTest extends TestCase
         ];
     }
 
+    public function uniqueIteratorDataProvider()
+    {
+        return [
+            [
+                new \ArrayIterator([
+                    'one',
+                    'one',
+                ]),
+                2,
+                [
+                    ['one'],
+                ]
+            ],
+            [
+                new \ArrayIterator([
+                    'one',
+                    'two',
+                    'one',
+                ]),
+                2,
+                [
+                    ['one', 'two'],
+                    ['one'],
+                ]
+            ],
+            [
+                new \ArrayIterator([
+                    'one',
+                    'two',
+                    'one',
+                    'two',
+                ]),
+                3,
+                [
+                    ['one', 'two'],
+                    ['two'],
+                ]
+            ],
+            [
+                new \ArrayIterator([
+                    'one',
+                    'two',
+                    'one',
+                    'two',
+                ]),
+                4,
+                [
+                    ['one', 'two'],
+                ]
+            ],
+            [
+                new \ArrayIterator([
+                    'one',
+                    'one',
+                    'one',
+                    'one',
+                    'one',
+                    'one',
+                    'two',
+                ]),
+                6,
+                [
+                    ['one'],
+                    ['two'],
+                ]
+            ],
+            [
+                new \ArrayIterator([
+                    'one',
+                    'one',
+                    'one',
+                    'one',
+                    'one',
+                    'two',
+                ]),
+                2,
+                [
+                    ['one'],
+                    ['one'],
+                    ['one', 'two'],
+                ]
+            ],
+        ];
+    }
+
     /**
      * @dataProvider iteratorDataProvider
      */
@@ -247,6 +332,15 @@ class ChunkIteratorTest extends TestCase
     public function testIteratorWithKeyPreserving($iterator, $chunkSize, $expected)
     {
         $chunks = iterator_to_array(new ChunkIterator($iterator, $chunkSize, true));
+        $this->assertEquals($expected, $chunks);
+    }
+
+    /**
+     * @dataProvider uniqueIteratorDataProvider
+     */
+    public function testUniqueIterator($iterator, $chunkSize, $expected)
+    {
+        $chunks = iterator_to_array(new ChunkIterator($iterator, $chunkSize, false, true));
         $this->assertEquals($expected, $chunks);
     }
 }
