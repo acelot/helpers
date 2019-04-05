@@ -2,9 +2,6 @@
 
 namespace Acelot\Helpers;
 
-const SECONDS = Retry::SECONDS;
-const MILLISECONDS = Retry::MILLISECONDS;
-
 /**
  * Repeats the callback until the answer is returned or timeout occurs.
  *
@@ -17,7 +14,7 @@ const MILLISECONDS = Retry::MILLISECONDS;
  */
 function retry_timeout(callable $callable, int $timeout, int $pause = 0)
 {
-    return Retry::create($callable, $timeout, -1, $pause)->run();
+    return repeat($callable, timeout($timeout), pause($pause));
 }
 
 /**
@@ -32,5 +29,5 @@ function retry_timeout(callable $callable, int $timeout, int $pause = 0)
  */
 function retry_count(callable $callable, int $count, int $pause = 0)
 {
-    return Retry::create($callable, -1, $count, $pause)->run();
+    return repeat($callable, max_attempts($count), pause($pause));
 }

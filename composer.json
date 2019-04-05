@@ -26,10 +26,11 @@
     },
     "files": [
       "src/array_helpers.php",
-      "src/common_helpers.php",
+      "src/path_helpers.php",
       "src/date_helpers.php",
       "src/retry_helpers.php",
-      "src/string_helpers.php"
+      "src/string_helpers.php",
+      "src/repeat_helper.php"
     ]
   },
   "autoload-dev": {

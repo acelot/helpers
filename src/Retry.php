@@ -2,6 +2,9 @@
 
 namespace Acelot\Helpers;
 
+/**
+ * @deprecated Use `repeat` function.
+ */
 class Retry
 {
     public const SECONDS = 1000000;
