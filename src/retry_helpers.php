@@ -2,6 +2,16 @@
 
 namespace Acelot\Helpers;
 
+use const Acelot\Helpers\Repeat\SECONDS as REPEAT_SECONDS;
+use const Acelot\Helpers\Repeat\MILLISECONDS as REPEAT_MILLISECONDS;
+use function Acelot\Helpers\Repeat\max_attempts;
+use function Acelot\Helpers\Repeat\pause;
+use function Acelot\Helpers\Repeat\repeat;
+use function Acelot\Helpers\Repeat\timeout;
+
+const SECONDS = REPEAT_SECONDS;
+const MILLISECONDS = REPEAT_MILLISECONDS;
+
 /**
  * Repeats the callback until the answer is returned or timeout occurs.
  *

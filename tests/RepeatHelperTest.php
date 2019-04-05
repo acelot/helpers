@@ -2,12 +2,12 @@
 
 namespace Acelot\Helpers\Tests;
 
-use function Acelot\Helpers\catch_only;
-use function Acelot\Helpers\max_attempts;
-use const Acelot\Helpers\MILLISECONDS;
-use function Acelot\Helpers\pause;
-use function Acelot\Helpers\repeat;
-use function Acelot\Helpers\timeout;
+use const Acelot\Helpers\Repeat\MILLISECONDS;
+use function Acelot\Helpers\Repeat\catch_only;
+use function Acelot\Helpers\Repeat\max_attempts;
+use function Acelot\Helpers\Repeat\pause;
+use function Acelot\Helpers\Repeat\repeat;
+use function Acelot\Helpers\Repeat\timeout;
 use PHPUnit\Framework\TestCase;
 
 class RepeatHelperTest extends TestCase

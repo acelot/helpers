@@ -25,12 +25,12 @@
       "Acelot\\Helpers\\": "src"
     },
     "files": [
+      "src/repeat_helper.php",
       "src/array_helpers.php",
       "src/path_helpers.php",
       "src/date_helpers.php",
       "src/retry_helpers.php",
-      "src/string_helpers.php",
-      "src/repeat_helper.php"
+      "src/string_helpers.php"
     ]
   },
   "autoload-dev": {

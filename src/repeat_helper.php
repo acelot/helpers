@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Acelot\Helpers;
+namespace Acelot\Helpers\Repeat;
 
 const SECONDS = 1000000;
 const MILLISECONDS = 1000;
